@@ -60,36 +60,32 @@ describe("markdown processing and syntax highlighting", function() {
 
   it("adds js class to javascript blocks", function(){
     assert(fixtures.basic.indexOf("```js"))
-    assert($("code.js").length)
+    assert($(".js").length)
   })
 
   it("adds sh class to shell blocks", function(){
     assert(fixtures.basic.indexOf("```sh"))
-    assert($("code.sh").length)
+    assert($(".shell").length)
   })
 
-  it("adds sh class to shell blocks", function(){
+  it("adds coffee class to coffeescript blocks", function(){
     assert(fixtures.basic.indexOf("```coffee"))
-    assert($("code.coffeescript").length)
-  })
-
-  it("adds hightlight class to all blocks", function() {
-    assert.equal($("code").length, $("code.highlight").length)
+    assert($(".coffee").length)
   })
 
   it("applies inline syntax highlighting classes to javascript", function(){
-    assert($("code.js span.kd").length)
-    assert($("code.js span.nx").length)
-    assert($("code.js span.p").length)
+    assert($(".js span.keyword").length)
+    assert($(".js span.modifier").length)
+    assert($(".js span.function").length)
   })
 
   it("applies inline syntax highlighting classes to shell", function(){
-    assert($("code.sh span.nb").length)
+    assert($(".shell span.builtin").length)
   })
 
   it("applies inline syntax highlighting classes to coffeesript", function(){
-    assert($("code.coffeescript span.nx").length)
-    assert($("code.coffeescript span.s").length)
+    assert($(".coffee span.definition").length)
+    assert($(".coffee span.begin").length)
   })
 
 })
@@ -112,7 +108,6 @@ describe("sanitize", function(){
   it("can be disabled to allow input from trusted sources", function(done){
     assert(~fixtures.dirty.indexOf("<script"))
     marky(fixtures.dirty, {sanitize: false}, function(err, $){
-      console.log($("script"))
       assert.equal($("script").length, 1)
       assert.equal($("script[src='http://malware.com']").length, 1)
       assert.equal($("script[type='text/javascript']").length, 1)
@@ -137,10 +132,6 @@ describe("sanitize", function(){
   it("removes classnames from elements", function() {
     assert(~fixtures.dirty.indexOf("class=\"xxx\""))
     assert(!$(".xxx").length)
-  })
-
-  it("allows classnames on code tags", function() {
-    assert($("code.highlight").length)
   })
 
   it("disallows iframes from sources other than youtube", function(done) {

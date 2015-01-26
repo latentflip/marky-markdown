@@ -32,13 +32,12 @@
   "dependencies": {
     "cheerio": "^0.18.0",
     "github-url-to-object": "^1.4.2",
+    "highlights": "^0.15.0",
     "html-frontmatter": "^1.2.1",
     "js-beautify": "^1.5.4",
     "lodash": "^2.4.1",
     "marked": "^0.3.2",
     "pretty": "^1.0.0",
-    "pygmentize-bundled": "^2.3.0",
-    "pygments-tokens": "^1.0.1",
     "sanitize-html": "^1.4.3",
     "similarity": "^1.0.1"
   },
